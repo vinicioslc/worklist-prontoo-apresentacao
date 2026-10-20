@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Worklist Prontoo</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/white.css">
+<style>
+  :root {
+    --fg: #020617; --muted: #64748b; --line: #e2e8f0; --soft: #f1f5f9; --dark: #0f172a;
+    --ok: #16a34a; --warn: #d97706; --bad: #dc2626;
+    --r-background-color: #fff; --r-main-color: var(--fg); --r-heading-color: var(--fg);
+    --r-main-font: Inter, ui-sans-serif, system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+    --r-heading-font: var(--r-main-font); --r-main-font-size: 32px;
+    --r-heading-text-transform: none; --r-heading-font-weight: 750; --r-heading-letter-spacing: -0.03em;
+  }
+  .reveal .slides { text-align: left; }
+  .reveal h1 { font-size: 2.4em; line-height: 1.05; }
+  .reveal h2 { font-size: 1.5em; margin-bottom: .6em; }
+  .reveal p, .reveal li { line-height: 1.45; }
+  .reveal ul { margin-left: 1em; } .reveal li { margin: .3em 0; }
+  .muted { color: var(--muted); } .small { font-size: .7em; } .xs { font-size: .55em; }
+  .eyebrow { font-size: .5em; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: .5em; }
+  .lead { font-size: 1.05em; color: #334155; max-width: 30em; }
+  .grid { display: grid; gap: 20px; } .g2 { grid-template-columns: 1fr 1fr; } .g3 { grid-template-columns: repeat(3, 1fr); } .g4 { grid-template-columns: repeat(4, 1fr); }
+  .card { border: 1px solid var(--line); border-radius: 14px; padding: 22px 24px; background: #fff; box-shadow: 0 1px 2px rgb(0 0 0 / .05); }
+  .card .ico { font-size: 1.1em; margin-bottom: .3em; }
+  .card h3 { margin: 0 0 .3em; font-size: .78em; font-weight: 700; letter-spacing: -0.01em; }
+  .card p { font-size: .6em; margin: 0; color: #475569; }
+  .big { font-size: 2.1em; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+  .big.bad { color: var(--bad); } .big.ok { color: var(--ok); }
+  .pill { display: inline-block; font-size: .5em; font-weight: 700; padding: .3em .9em; border-radius: 999px; border: 1px solid; vertical-align: middle; }
+  .pill.ok { color: var(--ok); background: #f0fdf4; border-color: #bbf7d0; }
+  .pill.warn { color: var(--warn); background: #fffbeb; border-color: #fde68a; }
+  .pill.bad { color: var(--bad); background: #fef2f2; border-color: #fecaca; }
+  .shot { border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 20px 40px -15px rgb(15 23 42 / .3); margin: 0 !important; max-height: 470px; }
+  .flow { display: flex; align-items: stretch; gap: 14px; }
+  .flow .node { flex: 1; border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; font-size: .6em; color: #475569; background: #fff; }
+  .flow .node b { display: block; font-size: 1.25em; color: var(--fg); margin-bottom: .25em; }
+  .flow .node.hl { background: var(--dark); color: #cbd5e1; border-color: var(--dark); }
+  .flow .node.hl b { color: #fff; }
+  .flow .arrow { align-self: center; color: var(--muted); font-size: 1.2em; }
+  .row { display: flex; gap: 14px; align-items: baseline; padding: .55em 0; border-bottom: 1px solid var(--line); font-size: .66em; }
+  .row:last-child { border-bottom: 0; }
+  .row .k { flex: 0 0 9.5em; font-weight: 700; }
+  .row .v { flex: 1; color: #475569; }
+  .logo { width: 72px; height: 72px; border-radius: 18px; background: var(--dark); color: #f8fafc; display: grid; place-items: center; font-weight: 800; font-size: 28px; margin-bottom: 30px; }
+  .reveal .progress { color: var(--dark); height: 3px; }
+  .reveal .slide-number { background: transparent; color: var(--muted); font-size: 14px; }
+  .reveal .controls { color: var(--dark); }
+  .ask { border-left: 4px solid var(--dark); padding: 6px 0 6px 18px; margin: .45em 0; font-size: .7em; }
+  .ask b { display: block; font-size: 1.05em; }
+  .ask span { color: #475569; }
+</style>
+</head>
+<body>
+<div class="reveal"><div class="slides">
+
+<!-- 1. Capa -->
+<section>
+  <div class="logo">WL</div>
+  <div class="eyebrow">Prontoo · KS-LABS · 20 de outubro de 2026</div>
+  <h1>Worklist Prontoo</h1>
+  <p class="lead">A fila de exames de imagem do hospital, visível, segura e registrada.</p>
+  <p><span class="pill ok">Versão 0.1.0 pronta para piloto</span></p>
+  <aside class="notes">Apresentação para gestão. Detalhes técnicos nas specs do repositório ks-labs/worklist-web (specs/01 a 09).</aside>
+</section>
+
+<!-- 2. Resumo -->
+<section>
+  <div class="eyebrow">Resumo</div>
+  <h2>Em um minuto</h2>
+  <div class="row"><div class="k">O que é</div><div class="v">O sistema que diz a cada aparelho (raio-X, tomógrafo, ultrassom) quais exames ele deve fazer, com os dados do paciente já preenchidos.</div></div>
+  <div class="row"><div class="k">Por que agora</div><div class="v">Hoje esse papel é de um sistema de terceiros (TZION), sem tela, sem histórico e sem saber se o exame foi feito.</div></div>
+  <div class="row"><div class="k">O que entregamos</div><div class="v">Sistema próprio do Prontoo, compatível com o que o hospital já usa, com tela de acompanhamento e histórico que não pode ser apagado.</div></div>
+  <div class="row"><div class="k">Estado</div><div class="v">Pronto para piloto em rede interna. Instaladores para Windows, Linux e Docker publicados.</div></div>
+  <div class="row"><div class="k">O que precisamos</div><div class="v">Três decisões para colocar no hospital (último slide).</div></div>
+</section>
+
+<!-- 3. Problema -->
+<section>
+  <div class="eyebrow">O problema hoje · CSPM</div>
+  <h2>A fila existe, mas ninguém a enxerga</h2>
+  <div class="grid g3">
+    <div class="card"><div class="big bad">20.352</div><h3 style="margin-top:.5em">pedidos "pendentes" acumulados</h3><p>De dez/2023 a ago/2026, nenhum foi marcado como feito. Não dá para saber o que foi realizado.</p></div>
+    <div class="card"><div class="big bad">0</div><h3 style="margin-top:.5em">telas de acompanhamento</h3><p>Recepção e gestão não veem a fila. Problema só aparece quando o aparelho não acha o paciente.</p></div>
+    <div class="card"><div class="big bad">0</div><h3 style="margin-top:.5em">registros de quem mudou o quê</h3><p>Alterações e cancelamentos não deixam rastro. Difícil auditar e responder a questionamentos.</p></div>
+  </div>
+  <p class="xs muted" style="margin-top:22px">Fonte: levantamento do próprio fornecedor (Sintaxe), 31/08/2026. Além disso, quem envia pedidos precisa de acesso direto ao banco de dados do hospital.</p>
+</section>
+
+<!-- 4. Como funciona -->
+<section>
+  <div class="eyebrow">A solução</div>
+  <h2>Como funciona</h2>
+  <div class="flow">
+    <div class="node"><b>Sistema do hospital</b>Recepção libera o exame (hoje: Sintaxe)</div>
+    <div class="arrow">→</div>
+    <div class="node hl"><b>Worklist Prontoo</b>Confere os dados, organiza a fila, registra tudo</div>
+    <div class="arrow">→</div>
+    <div class="node"><b>Aparelhos</b>Recebem o exame com o paciente preenchido</div>
+    <div class="arrow">→</div>
+    <div class="node"><b>Arquivo de imagens</b>Quando a imagem chega, o exame é dado como feito</div>
+  </div>
+  <div class="grid g3" style="margin-top:26px">
+    <div class="card"><h3>Nada muda para o aparelho</h3><p>Mesmas informações, no mesmo formato de hoje. Sem reconfigurar equipamento.</p></div>
+    <div class="card"><h3>Nada é perdido</h3><p>Pedidos ficam guardados como hoje. Cancelar não apaga: marca e registra o motivo.</p></div>
+    <div class="card"><h3>Sabe o que foi feito</h3><p>Exame concluído pela tela ou automaticamente quando a imagem chega (opcional).</p></div>
+  </div>
+</section>
+
+<!-- 5. Tela -->
+<section>
+  <div class="eyebrow">Na prática</div>
+  <h2>A fila do dia, em uma tela</h2>
+  <div class="grid" style="grid-template-columns: 1.55fr 1fr; align-items:start; gap:28px">
+    <img class="shot" src="img/exec-worklist.png" alt="Tela da fila do dia">
+    <div class="small">
+      <ul>
+        <li>Exames do dia, pendentes, concluídos e cancelados</li>
+        <li>Qual aparelho já buscou cada exame</li>
+        <li>Lista de todos os pedidos, não só os de hoje</li>
+        <li>Histórico completo de cada exame</li>
+        <li>Funciona no computador e no celular, tema claro e escuro</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Integrações -->
+<section>
+  <div class="eyebrow">Integração</div>
+  <h2>Conecta com o que já existe</h2>
+  <div class="grid" style="grid-template-columns: 1.55fr 1fr; align-items:start; gap:28px">
+    <img class="shot" src="img/exec-adapters.png" alt="Conectores disponíveis">
+    <div class="small">
+      <p><b>Sintaxe</b><br><span class="muted">Aceita os pedidos exatamente no formato que o Sintaxe já usa. Troca simples, sem retrabalho do fornecedor.</span></p>
+      <p><b>Orthanc</b><br><span class="muted">Fala a mesma "língua" do Orthanc, o arquivo de imagens de código aberto mais usado. Ferramentas feitas para ele funcionam aqui.</span></p>
+      <p><b>Documentação na própria tela</b><br><span class="muted">Cada conector mostra exemplos que podem ser testados ali mesmo.</span></p>
+    </div>
+  </div>
+  <aside class="notes">Adapter default (colunas de WL_EXAMSSCHEDULED) e adapter orthanc (mesma API REST do plugin Worklists do Orthanc). Spec 08 e 09.</aside>
+</section>
+
+<!-- 7. Confiança -->
+<section>
+  <div class="eyebrow">Segurança e qualidade</div>
+  <h2>Feito para não falhar em silêncio</h2>
+  <div class="grid g4">
+    <div class="card"><div class="big ok">57</div><h3 style="margin-top:.5em">testes automáticos</h3><p>Rodam a cada mudança, simulando aparelhos, o Sintaxe e o Orthanc.</p></div>
+    <div class="card"><div class="big ok">100%</div><h3 style="margin-top:.5em">das alterações registradas</h3><p>Quem, quando, por quê e o dado original, com prova de que nada foi adulterado.</p></div>
+    <div class="card"><div class="big ok">0</div><h3 style="margin-top:.5em">dados alterados em silêncio</h3><p>Dado inválido é recusado com o motivo. Nunca é cortado ou "corrigido".</p></div>
+    <div class="card"><div class="big ok">~9 MB</div><h3 style="margin-top:.5em">de memória</h3><p>Roda em qualquer computador do hospital, sem servidor dedicado.</p></div>
+  </div>
+  <aside class="notes">57 = 33 testes Rust (unitários, contrato com equipamentos, Sintaxe, Central de Laudos e Orthanc) + 24 Playwright (API e telas). Memória medida em /api/health com pouca carga, 19/10/2026.</aside>
+</section>
+
+<!-- 8. Instalação -->
+<section>
+  <div class="eyebrow">Implantação</div>
+  <h2>Instala em minutos</h2>
+  <div class="grid g3">
+    <div class="card"><div class="ico">🪟</div><h3>Windows</h3><p>Instalador de um clique. Liga sozinho com o computador e se recupera se cair. Atualizar é rodar o instalador novo.</p></div>
+    <div class="card"><div class="ico">🐧</div><h3>Linux</h3><p>Um arquivo e um comando. Ideal para servidores do hospital.</p></div>
+    <div class="card"><div class="ico">📦</div><h3>Docker</h3><p>Para quem já usa contêineres na infraestrutura.</p></div>
+  </div>
+  <p class="small muted" style="margin-top:24px">Versão 0.1.0 publicada em 19/10/2026, com verificação de integridade de cada arquivo.</p>
+</section>
+
+<!-- 9. Riscos -->
+<section>
+  <div class="eyebrow">Transparência</div>
+  <h2>O que ainda falta</h2>
+  <div class="row"><div class="k"><span class="pill bad">Atenção</span></div><div class="v"><b>Sem login na tela ainda.</b> Até definirmos, usar só na rede interna do hospital.</div></div>
+  <div class="row"><div class="k"><span class="pill warn">Decidir</span></div><div class="v"><b>Como o Sintaxe envia os pedidos:</b> continuar gravando no banco (e nós lemos) ou chamar o Worklist Prontoo direto.</div></div>
+  <div class="row"><div class="k"><span class="pill warn">Validar</span></div><div class="v"><b>Teste com os aparelhos reais da CSPM</b>: nomes com acento, tipos de exame e salas.</div></div>
+  <div class="row"><div class="k"><span class="pill warn">Pendente</span></div><div class="v"><b>Assinatura digital do instalador</b> (o Windows mostra um aviso na primeira vez) e publicação no Docker Hub.</div></div>
+</section>
+
+<!-- 10. Decisões -->
+<section>
+  <div class="eyebrow">Próximos passos</div>
+  <h2>Três decisões para ir ao hospital</h2>
+  <div class="ask fragment"><b>1. Login da tela</b><span>Usar o mesmo login do Prontoo ou um próprio do Worklist.</span></div>
+  <div class="ask fragment"><b>2. Entrada dos pedidos na CSPM</b><span>Autorizar a leitura do banco atual (sem mudar nada no Sintaxe) ou combinar com o Sintaxe a chamada direta.</span></div>
+  <div class="ask fragment"><b>3. Piloto</b><span>Escolher um aparelho e uma data para rodar em paralelo com o sistema atual, sem desligar nada.</span></div>
+  <p class="xs muted" style="margin-top:26px">Perguntas Q04, Q07 e Q13 nas specs. Repositório privado: github.com/ks-labs/worklist-web.</p>
+</section>
+
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/notes/notes.js"></script>
+<script>
+  Reveal.initialize({ hash: true, slideNumber: 'c/t', progress: true, center: false, width: 1280, height: 720, margin: 0.07, transition: 'fade', plugins: [RevealNotes] });
+</script>
+</body>
+</html>
